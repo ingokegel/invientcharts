@@ -15,65 +15,30 @@
  */
 package com.invient.vaadin.charts.widgetset.client.ui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.*;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.*;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartLabels.GwtChartLabelItem;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartOptions.GwtChartEvents;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.*;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker.GwtMarkerStates;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker.GwtMarkerStates.GwtMarkerState;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions.GwtStates;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions.GwtStates.GwtHover;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPointOptions.GwtPointEvents;
+import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtXAxisOptions.GwtDateTimeLabelFormats;
 import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.VConsole;
 
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtAxisDataLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtAxisTitleOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtPlotBands;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtPlotLabel;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtPlotLines;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtXAxisDataLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtAxisBaseOptions.GwtYAxisDataLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartLabels.GwtChartLabelItem;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtChartOptions.GwtChartEvents;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtCreditOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtLegendOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtAreaOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtAreaSplineOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtBarOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtBaseBarOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtBaseLineOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtColumnOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtDataLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtLineOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker.GwtMarkerStates;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker.GwtMarkerStates.GwtMarkerState;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtPieDataLabels;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtPieOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtScatterOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesEvents;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions.GwtStates;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions.GwtStates.GwtHover;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSplineOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPointOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPointOptions.GwtPointEvents;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPosition;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtSeriesDataOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtSubtitleOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtTitleBaseOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtTitleOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtTooltipOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtXAxisOptions;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtXAxisOptions.GwtDateTimeLabelFormats;
-import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtYAxisOptions;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Client side widget which communicates with the server. Messages from the
@@ -1092,7 +1057,7 @@ public class VInvientCharts extends GwtInvientCharts implements Paintable /*
         }
         if (uidl.hasAttribute("borderColor")) {
             tooltipOptions.setBorderColor(uidl
-                    .getStringAttribute("borderColor"));
+                .getStringAttribute("borderColor"));
         }
         if (uidl.hasAttribute("borderRadius")) {
             tooltipOptions
@@ -1110,7 +1075,7 @@ public class VInvientCharts extends GwtInvientCharts implements Paintable /*
         }
         if (uidl.hasAttribute("formatter")) {
             tooltipOptions.setFormatter(getExecutableFunction(uidl
-                    .getStringAttribute("formatter")));
+                .getStringAttribute("formatter")));
         }
         if (uidl.hasAttribute("shadow")) {
             tooltipOptions.setShadow(uidl.getBooleanAttribute("shadow"));
@@ -1123,6 +1088,27 @@ public class VInvientCharts extends GwtInvientCharts implements Paintable /*
         }
         if (uidl.hasAttribute("style")) {
             tooltipOptions.setStyle(uidl.getStringAttribute("style"));
+        }
+        if (uidl.hasAttribute("xDateFormat")) {
+            tooltipOptions.setXDateFormat(uidl.getStringAttribute("xDateFormat"));
+        }
+        if (uidl.hasAttribute("pointFormat")) {
+            tooltipOptions.setPointFormat(uidl.getStringAttribute("pointFormat"));
+        }
+        if (uidl.hasAttribute("valueSuffix")) {
+            tooltipOptions.setValueSuffix(uidl.getStringAttribute("valueSuffix"));
+        }
+        if (uidl.hasAttribute("valuePrefix")) {
+            tooltipOptions.setValuePrefix(uidl.getStringAttribute("valuePrefix"));
+        }
+        if (uidl.hasAttribute("footerFormat")) {
+            tooltipOptions.setFooterFormat(uidl.getStringAttribute("footerFormat"));
+        }
+        if (uidl.hasAttribute("valueDecimals")) {
+            tooltipOptions.setValueDecimals(uidl.getIntAttribute("valueDecimals"));
+        }
+        if (uidl.hasAttribute("useHTML")) {
+            tooltipOptions.setUseHtml(uidl.getBooleanAttribute("useHTML"));
         }
 
         VConsole.log("Exit [getTooltipOptions]");

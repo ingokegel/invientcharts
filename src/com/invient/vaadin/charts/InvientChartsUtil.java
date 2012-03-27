@@ -15,78 +15,22 @@
  */
 package com.invient.vaadin.charts;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import com.invient.vaadin.charts.InvientCharts.*;
+import com.invient.vaadin.charts.InvientChartsConfig.*;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.*;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.DateTimePlotBand.DateTimeRange;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.DateTimePlotLine.DateTimeValue;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.NumberPlotBand.NumberRange;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.NumberPlotLine.NumberValue;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotBand.Range;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotLine.Value;
+import com.invient.vaadin.charts.InvientChartsConfig.ChartLabel.ChartLabelItem;
+import com.invient.vaadin.charts.InvientChartsConfig.DateTimeAxis.DateTimeLabelFormat;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 
-import com.invient.vaadin.charts.InvientCharts.DateTimeSeries;
-import com.invient.vaadin.charts.InvientCharts.DecimalPoint;
-import com.invient.vaadin.charts.InvientCharts.Point;
-import com.invient.vaadin.charts.InvientCharts.Series;
-import com.invient.vaadin.charts.InvientCharts.SeriesCUR;
-import com.invient.vaadin.charts.InvientCharts.SeriesType;
-import com.invient.vaadin.charts.InvientChartsConfig.AreaConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.AreaSplineConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.Axis;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.AxisTitle;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.DateTimePlotBand.DateTimeRange;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.DateTimePlotLine.DateTimeValue;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.Grid;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.MinorGrid;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.MinorTick;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.NumberPlotBand.NumberRange;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.NumberPlotLine.NumberValue;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotBand;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotBand.Range;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotLine;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.PlotLine.Value;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.Tick;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisDataLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.BarConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.BaseBarConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.BaseLineConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.CategoryAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.ChartLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.ChartLabel.ChartLabelItem;
-import com.invient.vaadin.charts.InvientChartsConfig.ColumnConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.Credit;
-import com.invient.vaadin.charts.InvientChartsConfig.DataLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.DateTimeAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.DateTimeAxis.DateTimeLabelFormat;
-import com.invient.vaadin.charts.InvientChartsConfig.GeneralChartConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.ImageMarker;
-import com.invient.vaadin.charts.InvientChartsConfig.Legend;
-import com.invient.vaadin.charts.InvientChartsConfig.LineConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.Marker;
-import com.invient.vaadin.charts.InvientChartsConfig.MarkerState;
-import com.invient.vaadin.charts.InvientChartsConfig.NonLinearSeriesState;
-import com.invient.vaadin.charts.InvientChartsConfig.NumberAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.NumberXAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.NumberYAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.PieConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.PieDataLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.ScatterConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.SeriesConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.SeriesState;
-import com.invient.vaadin.charts.InvientChartsConfig.SplineConfig;
-import com.invient.vaadin.charts.InvientChartsConfig.SubTitle;
-import com.invient.vaadin.charts.InvientChartsConfig.SymbolMarker;
-import com.invient.vaadin.charts.InvientChartsConfig.Title;
-import com.invient.vaadin.charts.InvientChartsConfig.TitleBase;
-import com.invient.vaadin.charts.InvientChartsConfig.Tooltip;
-import com.invient.vaadin.charts.InvientChartsConfig.XAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.XAxisDataLabel;
-import com.invient.vaadin.charts.InvientChartsConfig.YAxis;
-import com.invient.vaadin.charts.InvientChartsConfig.YAxisDataLabel;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * A utility class used by {@link InvientCharts} to write its state to the UIDL
@@ -373,6 +317,27 @@ final class InvientChartsUtil {
         }
         if (tooltipOptions.getStyle() != null) {
             target.addAttribute("style", tooltipOptions.getStyle());
+        }
+        if (tooltipOptions.getXDateFormat() != null) {
+            target.addAttribute("xDateFormat", tooltipOptions.getXDateFormat());
+        }
+        if (tooltipOptions.getPointFormat() != null) {
+            target.addAttribute("pointFormat", tooltipOptions.getPointFormat());
+        }
+        if (tooltipOptions.getValueSuffix() != null) {
+            target.addAttribute("valueSuffix", tooltipOptions.getValueSuffix());
+        }
+        if (tooltipOptions.getValuePrefix() != null) {
+            target.addAttribute("valuePrefix", tooltipOptions.getValuePrefix());
+        }
+        if (tooltipOptions.getFooterFormat() != null) {
+            target.addAttribute("footerFormat", tooltipOptions.getFooterFormat());
+        }
+        if (tooltipOptions.getValueDecimals() != null) {
+            target.addAttribute("valueDecimals", tooltipOptions.getValueDecimals());
+        }
+        if (tooltipOptions.getUseHTML() != null) {
+            target.addAttribute("useHTML", tooltipOptions.getUseHTML());
         }
 
         target.endTag("tooltip");

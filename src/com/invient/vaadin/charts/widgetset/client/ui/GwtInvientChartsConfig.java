@@ -19,7 +19,6 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayNumber;
 import com.google.gwt.core.client.JsArrayString;
-
 import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtDataLabels;
 import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtMarker;
 import com.invient.vaadin.charts.widgetset.client.ui.GwtInvientChartsConfig.GwtPlotOptions.GwtSeriesGeneralOptions;
@@ -1756,6 +1755,34 @@ class GwtInvientChartsConfig extends JavaScriptObject {
 
         public native final void setStyle(String style) /*-{
                                                         this.style = eval("(" + style + ")");
+                                                        }-*/;
+
+        public native final void setXDateFormat(String xDateFormat) /*-{
+                                                        this.xDateFormat = eval("(" + xDateFormat + ")");
+                                                        }-*/;
+
+        public native final void setPointFormat(String pointFormat) /*-{
+                                                        this.pointFormat = eval("(" + pointFormat + ")");
+                                                        }-*/;
+
+        public native final void setValueSuffix(String valueSuffix) /*-{
+                                                        this.valueSuffix = valueSuffix;
+                                                        }-*/;
+
+        public native final void setValuePrefix(String valuePrefix) /*-{
+                                                        this.valuePrefix = valuePrefix;
+                                                        }-*/;
+
+        public native final void setFooterFormat(String footerFormat) /*-{
+                                                        this.footerFormat = footerFormat;
+                                                        }-*/;
+
+        public native final void setValueDecimals(int valueDecimals) /*-{
+                                                        this.valueDecimals = valueDecimals;
+                                                        }-*/;
+
+        public native final void setUseHtml(boolean useHtml) /*-{
+                                                        this.useHtml = useHtml;
                                                         }-*/;
     }
 

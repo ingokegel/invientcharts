@@ -15,23 +15,11 @@
  */
 package com.invient.vaadin.charts;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-
 import com.invient.vaadin.charts.InvientCharts.SeriesType;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.AxisTitle;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.AxisType;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.Grid;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.MinorGrid;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.MinorTick;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.Tick;
-import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.WeekDay;
-import com.invient.vaadin.charts.InvientChartsConfig.GeneralChartConfig.ZoomType;
+import com.invient.vaadin.charts.InvientChartsConfig.AxisBase.*;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * This class encapsulates a number of configuration options for the
@@ -1034,9 +1022,9 @@ public final class InvientChartsConfig implements Serializable {
         }
 
         /**
-         * The value {@link ZoomType.X} represents horizontal zoom. The value
-         * {@link ZoomType.Y} represents vertical zoom. The value
-         * {@link ZoomType.XY} represents horizontal as well as vertical zoom.
+         * The value {@link #X} represents horizontal zoom. The value
+         * {@link #Y} represents vertical zoom. The value
+         * {@link #XY} represents horizontal as well as vertical zoom.
          * 
          * @author Invient
          * 
@@ -4644,7 +4632,7 @@ public final class InvientChartsConfig implements Serializable {
         }
     }
 
-    public static interface Axis extends Serializable {
+    public static interface Axis extends java.io.Serializable {
         public String getId();
 
         public void setId(String id);
@@ -5356,6 +5344,13 @@ public final class InvientChartsConfig implements Serializable {
         private Boolean shared;
         private Integer snap; // NA for pie/bar/column
         private String style;
+        private String xDateFormat;
+        private String pointFormat;
+        private String valueSuffix;
+        private String valuePrefix;
+        private String footerFormat;
+        private Integer valueDecimals;
+        private Boolean useHTML;
 
         public Paint getBackgroundColor() {
             return backgroundColor;
@@ -5445,6 +5440,62 @@ public final class InvientChartsConfig implements Serializable {
             this.style = style;
         }
 
+        public String getXDateFormat() {
+            return xDateFormat;
+        }
+
+        public void setXDateFormat(String xDateFormat) {
+            this.xDateFormat = xDateFormat;
+        }
+
+        public String getPointFormat() {
+            return pointFormat;
+        }
+
+        public void setPointFormat(String pointFormat) {
+            this.pointFormat = pointFormat;
+        }
+
+        public String getValueSuffix() {
+            return valueSuffix;
+        }
+
+        public void setValueSuffix(String valueSuffix) {
+            this.valueSuffix = valueSuffix;
+        }
+
+        public String getValuePrefix() {
+            return valuePrefix;
+        }
+
+        public void setValuePrefix(String valuePrefix) {
+            this.valuePrefix = valuePrefix;
+        }
+
+        public String getFooterFormat() {
+            return footerFormat;
+        }
+
+        public void setFooterFormat(String footerFormat) {
+            this.footerFormat = footerFormat;
+        }
+
+        public Integer getValueDecimals() {
+            return valueDecimals;
+        }
+
+        public void setValueDecimals(Integer valueDecimals) {
+            this.valueDecimals = valueDecimals;
+        }
+
+        public Boolean getUseHTML() {
+            return useHTML;
+        }
+
+        public void setUseHTML(Boolean useHTML) {
+            this.useHTML = useHTML;
+        }
+
         @Override
         public String toString() {
             return "Tooltip [backgroundColor=" + backgroundColor
@@ -5453,7 +5504,10 @@ public final class InvientChartsConfig implements Serializable {
                     + ", crosshairs=" + crosshairs + ", enabled=" + enabled
                     + ", formatter=" + formatterJsFunc + ", shadow=" + shadow
                     + ", shared=" + shared + ", snap=" + snap + ", style="
-                    + style + "]";
+                    + style + ", xDateFormat=" + xDateFormat
+                    + ", pointFormat=" + pointFormat  + ", valueSuffix=" + valueSuffix
+                    + ", valuePrefix=" + valuePrefix  + ", footerFormat=" + footerFormat
+                    + ", valueDecimals=" + valueDecimals  + ", useHTML=" + useHTML + "]";
         }
 
     }
