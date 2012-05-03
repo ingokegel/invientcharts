@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="invient:war exploded">
+    <output-path>$PROJECT_DIR$/build/artifacts/invient_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="invient" />
+          <element id="module-output" name="web" />
+          <element id="module-output" name="demo" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/WebContent/WEB-INF/lib/vaadin-6.7.6.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="web/web/Web" />
+    </root>
+  </artifact>
+</component>

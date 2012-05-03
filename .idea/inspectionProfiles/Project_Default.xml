@@ -1,0 +1,43 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0" is_locked="false">
+    <option name="myName" value="Project Default" />
+    <option name="myLocal" value="false" />
+    <inspection_tool class="CloneDeclaresCloneNotSupported" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="EmptyCatchBlock" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_includeComments" value="true" />
+      <option name="m_ignoreTestCases" value="true" />
+      <option name="m_ignoreIgnoreParameter" value="true" />
+    </inspection_tool>
+    <inspection_tool class="EqualsWhichDoesntCheckParameterClass" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="FieldCanBeLocal" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlDeprecatedTag" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="6">
+            <item index="0" class="java.lang.String" itemvalue="type" />
+            <item index="1" class="java.lang.String" itemvalue="wmode" />
+            <item index="2" class="java.lang.String" itemvalue="src" />
+            <item index="3" class="java.lang.String" itemvalue="width" />
+            <item index="4" class="java.lang.String" itemvalue="height" />
+            <item index="5" class="java.lang.String" itemvalue="autocomplete" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IgnoreResultOfCall" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_reportAllNonLibraryCalls" value="false" />
+      <option name="callCheckString" value="java.io.InputStream,read,java.io.InputStream,skip,java.lang.StringBuffer,toString,java.lang.StringBuilder,toString,java.lang.String,.*,java.math.BigInteger,.*,java.math.BigDecimal,.*,java.net.InetAddress,.*,java.io.File,.*" />
+    </inspection_tool>
+    <inspection_tool class="OctalLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PointlessArithmeticExpression" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="m_ignoreExpressionsContainingConstants" value="false" />
+    </inspection_tool>
+    <inspection_tool class="SimplifiableConditionalExpression" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SimplifiableIfStatement" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="ThrowableResultOfMethodCallIgnored" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="TrivialIf" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="TrivialIfJS" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>

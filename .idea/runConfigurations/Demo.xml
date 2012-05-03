@@ -1,0 +1,96 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Demo" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7">
+    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080" />
+    <option name="UPDATING_POLICY" value="restart-server" />
+    <deployment>
+      <artifact name="invient:war exploded">
+        <settings>
+          <option name="CONTEXT_PATH" value="/" />
+        </settings>
+      </artifact>
+    </deployment>
+    <server-settings>
+      <option name="BASE_DIRECTORY_NAME" value="Unnamed_invient" />
+    </server-settings>
+    <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <RunnerSettings RunnerId="Cover" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="53065" />
+      <option name="TRANSPORT" value="0" />
+      <option name="LOCAL" value="true" />
+    </RunnerSettings>
+    <RunnerSettings RunnerId="JProfiler">
+      <option name="JVM" value="C:/Program Files (x86)/Java/jdk1.6.0_26" />
+      <option name="WINDOW" value="false" />
+      <option name="JVMPI" value="false" />
+      <option name="INTERPRETED" value="false" />
+    </RunnerSettings>
+    <RunnerSettings RunnerId="Run" />
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="run" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="stop" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JProfiler">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="run" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="stop" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+      <option name="USE_ENV_VARIABLES" value="true" />
+      <STARTUP>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="run" />
+      </STARTUP>
+      <SHUTDOWN>
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="%IDEA_RUN:TOMCAT_HOME%/bin/catalina.bat" />
+        <option name="VM_PARAMETERS" value="" />
+        <option name="PROGRAM_PARAMETERS" value="stop" />
+      </SHUTDOWN>
+    </ConfigurationWrapper>
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="invient:war exploded" />
+      </option>
+    </method>
+  </configuration>
+</component>

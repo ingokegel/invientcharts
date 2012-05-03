@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="invientcharts">
+    <output-path>$PROJECT_DIR$/build/artifacts/invientcharts</output-path>
+    <root id="archive" name="invientcharts.jar">
+      <element id="module-output" name="invient" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/WebContent/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
