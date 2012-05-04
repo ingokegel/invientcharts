@@ -55,6 +55,8 @@ public final class InvientChartsConfig implements Serializable {
     private LinkedHashSet<XAxis> xAxes = new LinkedHashSet<XAxis>();
     private LinkedHashSet<YAxis> yAxes = new LinkedHashSet<YAxis>();
 
+    private TimeZone timeZone = TimeZone.getDefault();
+
     private InvientCharts invientCharts;
     
     InvientCharts getInvientCharts() {
@@ -64,7 +66,15 @@ public final class InvientChartsConfig implements Serializable {
     void setInvientCharts(InvientCharts invientCharts) {
         this.invientCharts = invientCharts;
     }
-    
+
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
+
     /**
      * 
      * @return The {@link ChartLabel} object representing labels at arbitrary

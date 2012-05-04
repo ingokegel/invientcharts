@@ -17,18 +17,7 @@ package com.invient.vaadin.charts;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
@@ -139,7 +128,7 @@ public class InvientCharts extends AbstractComponent {
         target.startTag("chartData");
         InvientChartsUtil.writeSeries(target, chartConfig
                 .getGeneralChartConfig().getType(), this.chartSeries,
-                chartConfig.getXAxes(), chartConfig.getYAxes());
+                chartConfig.getXAxes(), chartConfig.getYAxes(), chartConfig.getTimeZone());
         target.endTag("chartData");
         // A flag to indicate whether to retrieve svg from client or not.
         target.addAttribute("isRetrieveSVG", isRetrieveSVG);
@@ -161,7 +150,7 @@ public class InvientCharts extends AbstractComponent {
         target.addAttribute("reloadChartSeries", reloadChartSeries);
         target.startTag("chartDataUpdates");
         if (!reloadChartSeries) {
-            InvientChartsUtil.writeChartDataUpdates(target, seriesCURMap);
+            InvientChartsUtil.writeChartDataUpdates(target, seriesCURMap, chartConfig.getTimeZone());
         }
         target.endTag("chartDataUpdates");
         // reset flag
@@ -346,8 +335,9 @@ public class InvientCharts extends AbstractComponent {
                             && point.getY().compareTo(eventData.getPointY()) == 0
                             && point.getX() != null
                             && getDateInMilliseconds(point.getX(),
-                                    ((DateTimeSeries) series).isIncludeTime()) == (long) eventData
-                                    .getPointX()) {
+                                    ((DateTimeSeries) series).isIncludeTime(), chartConfig.getTimeZone()) ==
+                        (long)eventData.getPointX())
+                    {
                         return point;
                     }
                 }
@@ -356,19 +346,11 @@ public class InvientCharts extends AbstractComponent {
         return null;
     }
 
-    private static Long getDateInMilliseconds(Date dt, boolean isIncludeTime) {
+    private static Long getDateInMilliseconds(Date dt, boolean isIncludeTime, TimeZone timeZone) {
         if (dt == null) {
             return null;
         }
-        Calendar cal = GregorianCalendar.getInstance();
-        cal.setTime(dt);
-        if (!isIncludeTime) {
-            cal.set(Calendar.HOUR, 0);
-            cal.set(Calendar.MINUTE, 0);
-            cal.set(Calendar.SECOND, 0);
-            cal.set(Calendar.MILLISECOND, 0);
-        }
-        return cal.getTimeInMillis();
+        return InvientChartsUtil.getDate(dt, isIncludeTime, timeZone);
     }
 
     private Series getSeriesFromEventData(String seriesName) {
@@ -1448,7 +1430,7 @@ public class InvientCharts extends AbstractComponent {
     /**
      * Series legend item click event. This event is thrown, when legend item is
      * clicked. This event is not applicable for PieChart instead use
-     * {@link LegendItemClickEvent}
+     * {@link PieChartLegendItemClickEvent}
      * 
      * @author Invient
      */
@@ -2864,7 +2846,7 @@ public class InvientCharts extends AbstractComponent {
                     + getDateInMilliseconds(
                             x,
                             (getSeries() != null ? ((DateTimeSeries) getSeries())
-                                    .isIncludeTime() : false)) + ", y=" + y
+                                    .isIncludeTime() : false), null) + ", y=" + y
                     + ", id=" + getId() + ", name=" + getName()
                     + ", seriesName="
                     + (getSeries() != null ? getSeries().getName() : "") + "]";
@@ -2897,9 +2879,9 @@ public class InvientCharts extends AbstractComponent {
                     .getSeries()).isIncludeTime() : false);
             boolean pointOtherIncludeTime = (other.getSeries() instanceof DateTimeSeries ? ((DateTimeSeries) other
                     .getSeries()).isIncludeTime() : false);
-            Long pointX = getDateInMilliseconds(x, pointIncludeTime);
+            Long pointX = getDateInMilliseconds(x, pointIncludeTime, null);
             Long pointOtherX = getDateInMilliseconds(other.x,
-                    pointOtherIncludeTime);
+                    pointOtherIncludeTime, null);
 
             if (pointX.compareTo(pointOtherX) != 0)
                 return false;
@@ -3364,7 +3346,7 @@ public class InvientCharts extends AbstractComponent {
          * true then one point is shifted off the start of this series as one is
          * appended to the end.
          * 
-         * @param points
+         * @param point
          * @param shift
          *            If true then one point is shifted off the start of this
          *            series as one is appended to the end.

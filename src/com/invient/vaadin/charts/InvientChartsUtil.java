@@ -1107,11 +1107,12 @@ final class InvientChartsUtil {
      * @param data
      * @param xAxes
      * @param yAxes
+     * @param timeZone
      * @throws PaintException
      */
     public static void writeSeries(PaintTarget target,
-            SeriesType chartSeriesType, LinkedHashSet<Series> data,
-            LinkedHashSet<XAxis> xAxes, LinkedHashSet<YAxis> yAxes)
+                                   SeriesType chartSeriesType, LinkedHashSet<Series> data,
+                                   LinkedHashSet<XAxis> xAxes, LinkedHashSet<YAxis> yAxes, TimeZone timeZone)
             throws PaintException {
         if (data == null) {
             return;
@@ -1147,7 +1148,7 @@ final class InvientChartsUtil {
 
             target.startTag("points");
             if (series.getPoints() != null) {
-                writePoints(target, series.getPoints());
+                writePoints(target, series.getPoints(), timeZone);
             }
             target.endTag("points");
 
@@ -1163,10 +1164,11 @@ final class InvientChartsUtil {
      * 
      * @param target
      * @param points
+     * @param timeZone
      * @throws PaintException
      */
     private static void writePoints(PaintTarget target,
-            LinkedHashSet<? extends Point> points) throws PaintException {
+                                    LinkedHashSet<? extends Point> points, TimeZone timeZone) throws PaintException {
         if (points == null) {
             return;
         }
@@ -1187,7 +1189,7 @@ final class InvientChartsUtil {
                                 "x",
                                 getDate((Date) point.getX(),
                                         ((DateTimeSeries) point.getSeries())
-                                                .isIncludeTime()));
+                                                .isIncludeTime(), timeZone));
                     }
                 }
                 if (point.getY() != null) {
@@ -1736,7 +1738,9 @@ final class InvientChartsUtil {
                             target,
                             (DateTimeAxis) xAxis,
                             isIncludeTime((DateTimeAxis) xAxis, config
-                                    .getInvientCharts().getAllSeries()));
+                                    .getInvientCharts().getAllSeries()),
+                           config.getTimeZone()
+                        );
                 }
 
                 target.endTag("xAxis");
@@ -1778,10 +1782,11 @@ final class InvientChartsUtil {
      * Returns milliseconds of the date argument dt excluding time.
      * 
      * @param dt
+     * @param timeZone
      * @return
      */
-    public static long getDate(Date dt) {
-        return getDate(dt, false);
+    public static long getDate(Date dt, TimeZone timeZone) {
+        return getDate(dt, false, timeZone);
     }
 
     /**
@@ -1791,9 +1796,10 @@ final class InvientChartsUtil {
      * 
      * @param dt
      * @param isIncludeTime
+     * @param timeZone
      * @return
      */
-    private static long getDate(Date dt, boolean isIncludeTime) {
+    public static long getDate(Date dt, boolean isIncludeTime, TimeZone timeZone) {
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(dt);
         if (!isIncludeTime) {
@@ -1802,24 +1808,32 @@ final class InvientChartsUtil {
             cal.set(Calendar.SECOND, 0);
             cal.set(Calendar.MILLISECOND, 0);
         }
-        return cal.getTimeInMillis();
+
+        long timeInMillis = cal.getTimeInMillis(); // This is UTC
+        if (timeZone == null) {
+            return timeInMillis;
+        } else {
+            return timeInMillis + timeZone.getOffset(timeInMillis);
+        }
     }
 
     /**
+     *
      * @param target
      * @param dateTimeAxis
+     * @param timeZone
      * @throws PaintException
      */
     private static void writeDateTimeAxis(PaintTarget target,
-            DateTimeAxis dateTimeAxis, boolean isIncludeTime)
+                                          DateTimeAxis dateTimeAxis, boolean isIncludeTime, TimeZone timeZone)
             throws PaintException {
         if (dateTimeAxis.getMax() != null) {
             target.addAttribute("max",
-                    getDate(dateTimeAxis.getMax(), isIncludeTime));
+                    getDate(dateTimeAxis.getMax(), isIncludeTime, timeZone));
         }
         if (dateTimeAxis.getMin() != null) {
             target.addAttribute("min",
-                    getDate(dateTimeAxis.getMin(), isIncludeTime));
+                    getDate(dateTimeAxis.getMin(), isIncludeTime, timeZone));
         }
         if (dateTimeAxis.getDateTimeLabelFormat() != null) {
             target.startTag("dateTimeLabelFormats");
@@ -1984,11 +1998,12 @@ final class InvientChartsUtil {
      * 
      * @param target
      * @param seriesCURMap
+     * @param timeZone
      * @throws PaintException
      */
 
     public static void writeChartDataUpdates(PaintTarget target,
-            LinkedHashMap<String, LinkedHashSet<SeriesCUR>> seriesCURMap)
+                                             LinkedHashMap<String, LinkedHashSet<SeriesCUR>> seriesCURMap, TimeZone timeZone)
             throws PaintException {
         for (String seriesName : seriesCURMap.keySet()) {
             LinkedHashSet<SeriesCUR> seriesCURSet = seriesCURMap
@@ -2003,12 +2018,12 @@ final class InvientChartsUtil {
                             seriesCUR.isReloadPoints());
                     target.startTag("pointsAdded");
                     if (seriesCUR.getPointsAdded().size() > 0) {
-                        writePoints(target, seriesCUR.getPointsAdded());
+                        writePoints(target, seriesCUR.getPointsAdded(), timeZone);
                     }
                     target.endTag("pointsAdded");
                     target.startTag("pointsRemoved");
                     if (seriesCUR.getPointsRemoved().size() > 0) {
-                        writePoints(target, seriesCUR.getPointsRemoved());
+                        writePoints(target, seriesCUR.getPointsRemoved(), timeZone);
                     }
                     target.endTag("pointsRemoved");
                     target.endTag("seriesDataUpdate");
